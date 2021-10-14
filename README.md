@@ -49,23 +49,3 @@ it will change the context to the new EKS cluster.
     ex: "kubernetes.io/cluster/my-eks-cluster" = "shared"
 
 
-## Load Balancer
-In the testing app which is just a webserver/nginx is also created a NLB.
-To create the app and the load balancer issue the command:
-
-`kubectl create -f k8s/.`
-
-You should see this:
-```
-deployment.apps/nginx created
-service/internal-nginx-service created
-
-```
-
-For the Network Load Balancer check references:
-
-https://docs.aws.amazon.com/eks/latest/userguide/network-load-balancing.html#network-load-balancing-service-sample-manifest
-
-https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
-
-
