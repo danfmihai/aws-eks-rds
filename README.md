@@ -20,8 +20,8 @@ terraform apply
 This creates:
 - VPC
 - internet-gateway
-- 2 public subnets (load balancer)
-- 2 private subnets (for the workers)
+- 2 public subnets (for the workers)
+- 2 private subnets (RDS)
 - (2 nat gateways for the private subnets to access the internet)
 - (elastic IPs for each NAT gateways)
 - 3 routing tables (1 for public, 2 for private)
