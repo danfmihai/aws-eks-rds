@@ -11,7 +11,7 @@ resource "aws_vpc" "eks" {
 
   tags = {
     Name = "eks"
-  }   
+  }
 }
 
 output "vpc_id" {

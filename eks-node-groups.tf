@@ -9,17 +9,14 @@ resource "aws_eks_node_group" "nodes_general" {
     aws_subnet.public_2.id
   ]
 
+  # Configuration block with scaling settings
   scaling_config {
-    # Desired number of worker nodes
     desired_size = 1
-    # Maximum number of worker nodes
-    max_size = 2
-    # Minimum number of worker nodes
-    min_size = 1
+    max_size     = 5
+    min_size     = 1
   }
 
-  capacity_type  = "SPOT"
-  instance_types = ["t2.micro"]
+
   # Force version update if existing pods are unable to be drained due to a pod disruption budget issue.
   force_update_version = false
 
@@ -74,4 +71,6 @@ resource "aws_iam_role_policy_attachment" "amazon_eks_cni_policy" {
 resource "aws_iam_role_policy_attachment" "amazon_ec2_container_registry_read_only" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.node_role.name
-} 
+}
+
+

@@ -26,7 +26,9 @@ This creates:
 - (elastic IPs for each NAT gateways)
 - 3 routing tables (1 for public, 2 for private)
 - EKS cluster 
-- EKS node(s) - using t2.micro and SPOT instances
+- EKS node(s)
+- the AMI used are the latest Amazon Linux images
+- Auto Scaling Group with mixed instance types (on demand and spot)
 - adds label to the node(s) "role" = "nodes-general"
 
 

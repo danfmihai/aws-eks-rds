@@ -11,8 +11,7 @@ resource "aws_iam_role" "cluster_role" {
         "Service": "eks.amazonaws.com"
       },
       "Action": "sts:AssumeRole"
-    }
-  ]
+    }]
 }
 POLICY
 }
@@ -28,6 +27,13 @@ resource "aws_iam_role_policy_attachment" "amazon_eks_vpc_resource_controller" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
   role       = aws_iam_role.cluster_role.name
 }
+
+# Autoscaling policy
+# resource "aws_iam_role_policy_attachment" "amazon_eks_cluster_autoscaler_policy" {
+#   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterAutoscalerPolicy"
+#   role       = aws_iam_role.cluster_role.name
+# }
+
 
 # CLUSTER DEFINITION
 resource "aws_eks_cluster" "eks" {
@@ -48,7 +54,8 @@ resource "aws_eks_cluster" "eks" {
   # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.
   depends_on = [
     aws_iam_role_policy_attachment.amazon_eks_cluster_policy,
-    aws_iam_role_policy_attachment.amazon_eks_vpc_resource_controller
+    aws_iam_role_policy_attachment.amazon_eks_vpc_resource_controller,
+    #aws_iam_role_policy_attachment.amazon_eks_cluster_autoscaler_policy
   ]
 }
 
